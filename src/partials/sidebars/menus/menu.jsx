@@ -4,7 +4,7 @@ import Anchor from "./Anchor"
 // icons
 import { HomeIcon, UserIcon, WrenchScrewdriverIcon, InformationCircleIcon, ArrowsPointingInIcon, ArrowsPointingOutIcon, SunIcon, MoonIcon, ChevronDownIcon, ChevronUpIcon, ChevronLeftIcon, ChevronRightIcon, ChatBubbleLeftRightIcon, ClipboardDocumentListIcon, BackspaceIcon, PhotoIcon } from "@heroicons/react/24/solid"
 // image
-import LOGO from "../../../assets/logoDisDukCapil.png";
+import LOGO from "../../../assets/logoDisDukCaPil.png";
 import MMSLogo from "../../../assets/dinasMMS.png";
 // external style
 import "./menu.css"
