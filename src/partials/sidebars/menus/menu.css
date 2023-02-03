@@ -1,0 +1,13 @@
+.scroll-menu::-webkit-scrollbar {
+   width: 5px;
+}
+
+.scroll-menu::-webkit-scrollbar-track {
+   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-menu::-webkit-scrollbar-thumb {
+   border-radius:5px;
+   background-color: rgb(9, 217, 224);
+   outline: unset;
+}

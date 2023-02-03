@@ -1,0 +1,27 @@
+*{ box-sizing:border-box; }
+body::-webkit-scrollbar {
+   width: .6em;
+}
+
+body::-webkit-scrollbar-track {
+   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+   border-radius: .3em;
+   background-color: rgb(7, 155, 201);
+   outline: unset;
+}
+.main-scroll::-webkit-scrollbar {
+   width: .4em;
+}
+
+.main-scroll::-webkit-scrollbar-track {
+   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.main-scroll::-webkit-scrollbar-thumb {
+   border-radius: .2em;
+   background-color: rgb(8, 181, 233);
+   outline: unset;
+}
