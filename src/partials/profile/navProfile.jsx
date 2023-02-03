@@ -1,7 +1,13 @@
+import { UserCircleIcon } from "@heroicons/react/24/solid";
 const NavProfile = () => {
   return (
-    <div className="flex gap-2 bg-slate-200 dark:bg-slate-500 dark:text-white text-xs rounded">
-      <p className="p-3 rounded bg-slate-300 dark:bg-slate-900">PROFILE</p>
+    <div className="flex bg-slate-200 dark:bg-slate-500 dark:text-white text-xs rounded">
+      <span className="flex gap-0">
+        <p className="flex items-center gap-2 p-3 font-bold bg-slate-300 dark:bg-slate-900">
+          <UserCircleIcon className="w-5 h-5" />
+          PROFIL
+        </p>
+      </span>
     </div>
   );
 };

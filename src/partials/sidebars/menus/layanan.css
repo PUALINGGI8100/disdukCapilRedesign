@@ -1,0 +1,10 @@
+.layanan-collapse:hover .layanan-inside {
+   position: absolute;
+   display:flex; left:100%;
+   flex-direction: column;
+}
+@media screen and (max-width:360px){
+   .layanan-collapse:hover .layanan-inside {
+      position: static;
+   }
+}

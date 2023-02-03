@@ -1,58 +1,59 @@
 import { useState, useContext, createContext, useMemo, useEffect } from "react"
 import MenuCTX from "../../../context/menuCtx";
 import Anchor from "./Anchor"
+import BtnLayanan from "./layanan";
+import BtnInformasi from "./informasi";
 // icons
-import { HomeIcon, UserIcon, WrenchScrewdriverIcon, InformationCircleIcon, ArrowsPointingInIcon, ArrowsPointingOutIcon, SunIcon, MoonIcon, ChevronDownIcon, ChevronUpIcon, ChevronLeftIcon, ChevronRightIcon, ChatBubbleLeftRightIcon, ClipboardDocumentListIcon, BackspaceIcon, PhotoIcon } from "@heroicons/react/24/solid"
+import { HomeIcon, UserIcon, WrenchScrewdriverIcon, InformationCircleIcon, ArrowsPointingInIcon, ArrowsPointingOutIcon, SunIcon, MoonIcon, ChevronDownIcon, ChevronUpIcon, ChevronLeftIcon, ChevronRightIcon, ChatBubbleLeftRightIcon, ClipboardDocumentListIcon, BackspaceIcon, PhotoIcon, XCircleIcon } from "@heroicons/react/24/solid"
 // image
 import LOGO from "../../../assets/logoDisDukCaPil.png";
 import MMSLogo from "../../../assets/dinasMMS.png";
 // external style
 import "./menu.css"
-
-const SubMenuCTX = createContext();
-
-const SubMenuProvider = ({children}) => {
-   const [isSomeBtnActive, setIsSomeBtnActive] = useState(false);
-   const subMenuMemo = useMemo(() => ({
-      isSomeBtnActive, setIsSomeBtnActive
-   }), [isSomeBtnActive]);
-   return (
-      <SubMenuCTX.Provider value={subMenuMemo}>
-         {children}
-      </SubMenuCTX.Provider>
-   )
-}
+// sub context
+import { LayananCTX, InformasiCTX } from "./collapseCTX";
 
 const Menu = () => {
-   const [expand, setExpand] = useState(false);
+   const [expand, setExpand] = useState(true);
    const [activeLink, setActiveLink] = useState(0);
    const { menuShow, setMenuShow } = useContext(MenuCTX);
+   // Layanan provider
+   const [isLayananActive, setIsLayananActive] = useState(false);
+   const isLayananActiveMemo = useMemo(() => (
+      { isLayananActive, setIsLayananActive }
+   ), [isLayananActive]);
+   // Informasi Provider
+   const [isInformasiActive, setIsInformasiActive] = useState(false);
+   const isInformasiActiveMemo = useMemo(() => ({
+      isInformasiActive, setIsInformasiActive
+   }), [isInformasiActive])
    return (
-      <SubMenuProvider>
-         <span className={`absolute ${!expand&&menuShow?"flex":"hidden"} p-0 m-0 left-0 top-0 w-[100vw] h-full bg-slate-200 backdrop-blur-full opacity-70`}></span>
+      <LayananCTX.Provider value={isLayananActiveMemo}>
+      <InformasiCTX.Provider value={isInformasiActiveMemo}>
+         <span className={`absolute ${!expand&&menuShow?"flex":"hidden"} p-0 m-0 left-0 top-0 w-[100vw] h-full bg-slate-500 dark:bg-slate-200 backdrop-blur-full opacity-70`}></span>
          <nav className={`relative bg-white dark:bg-slate-900 flex flex-col w-max h-full max-h-full overflow-x-visible`}>
-            <div className="relative flex bg-slate-300 w-full p-3 py-5 flex-row flex-wrap gap-2 justify-center bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100 text-sm">
-               <span className="w-auto h-max">
+            <div className={`relative flex bg-slate-300 ${!expand?"w-full flex-row":"flex-col w-full"} p-3 py-5 flex-wrap gap-3 justify-center items-center bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100 text-sm`}>
+               <span className={`${!expand?"grow":"grow-0 w-max"} h-max`}>
                   <img className="w-auto h-6" src={expand?MMSLogo:LOGO} />
                </span>
                <BtnMode expand={expand} />
                <BtnExpand expand={expand} setExpand={setExpand} />
-            </div>
-            <div className="w-full h-max py-5 flex items-center justify-center">
-               <Anchor isActive={activeLink === 1} Icon={BackspaceIcon} text="sembunyikan" expand={expand} onClick={() => {
+               <BtnHideMenu expand={expand} onClick={() => {
                   setMenuShow((menuShow) => !menuShow);
                }} />
             </div>
-            <div className={`scroll-menu flex flex-col w-full h-full max-w-full max-h-full justify-start items-center ${!expand?"overflow-y-auto":"overvlow-x-visible"}`}>
+            <div className={`scroll-menu py-5 flex flex-col h-full max-w-full max-h-full justify-start items-center ${!expand?"overflow-y-auto w-full":"overvlow-x-visible w-max"}`}>
                <Anchor isActive={activeLink === 0} Icon={HomeIcon} to="/" text="Home" expand={expand} onClick={() => { setActiveLink(0) }} />
                <Anchor isActive={activeLink === 1} Icon={UserIcon} to="/profile" text="profile" expand={expand} onClick={() => { setActiveLink(1) }} />
-               <BtnCollapse Icon={WrenchScrewdriverIcon} teks="layanan" expand={expand} menuShow={menuShow}>
+               {/* LAYANAN menu */}
+               <BtnLayanan expand={expand}>
                   <Anchor isActive={activeLink===3} to="/layanan/1" text="Standard layanan" expand={expand} onClick={() => { setActiveLink(3) }} />
                   <Anchor isActive={activeLink===4} to="/layanan/2" text="Prosedur dan tata cara pengaduan" expand={expand} onClick={() => { setActiveLink(4) }} />
                   <Anchor isActive={activeLink===5} to="/layanan/3" text="Produk layanan" expand={expand} onClick={() => { setActiveLink(5) }} />
                   <Anchor isActive={activeLink===6} to="/layanan/4" text="SOP Pendaftaran Penduduk" expand={expand} onClick={() => { setActiveLink(6) }} />
-               </BtnCollapse>
-               <BtnCollapse Icon={InformationCircleIcon} teks="Informasi" expand={expand} menuShow={menuShow}>
+               </BtnLayanan>
+               {/* INFORMASI Menu */}
+               <BtnInformasi expand={expand}>
                   <Anchor isActive={activeLink===7} to="/informasi/1" text="DPA" expand={expand} onClick={() => { setActiveLink(7) }} />
                   <Anchor isActive={activeLink === 8} to="/informasi/2" text="RENSTRA" expand={expand} onClick={() => { setActiveLink(8) }} />
                   <BtnCollapse teks="DATA" expand={expand} force={true} menuShow={menuShow}>
@@ -60,13 +61,25 @@ const Menu = () => {
                      <Anchor isActive={activeLink === 10} to="/informasi/3/2" text="DAFDUK" expand={expand} onClick={() => { setActiveLink(10) }} />
                      <Anchor isActive={activeLink === 11} to="/informasi/3/3" text="CAPIL" expand={expand} onClick={() => { setActiveLink(11) }} />
                   </BtnCollapse>
-               </BtnCollapse>
+               </BtnInformasi>
+               {/* PENGADUAN Menu */}
                <Anchor isActive={activeLink === 12} Icon={ChatBubbleLeftRightIcon} to="/pengaduan" text="Pengaduan" expand={expand} onClick={() => { setActiveLink(12) }} />
+               {/* SURVEY Menu */}
                <Anchor isActive={activeLink === 13} Icon={ClipboardDocumentListIcon} to="/survey" text="Survey" expand={expand} onClick={() => { setActiveLink(13) }} />
+               {/* GALERY Menu */}
                <Anchor isActive={activeLink === 14} Icon={PhotoIcon} to="/galery" text="Galeri" expand={expand} onClick={() => { setActiveLink(14) }} />
             </div>
          </nav>
-      </SubMenuProvider>
+      </InformasiCTX.Provider>
+      </LayananCTX.Provider>
+   )
+}
+
+const BtnHideMenu = (props) => {
+   return (
+      <button className={`${props.expand?"w-full":"w-auto"} flex items-center justify-center hover:cursor-pointer`} title={"Sembunyikan Menu"} onClick={props.onClick}>
+         <XCircleIcon className="w-5 h-5" />
+      </button>
    )
 }
 
@@ -85,9 +98,7 @@ const BtnCollapse = ({children, Icon, teks, expand, force, menuShow}) => {
      <span className="relative flex flex-col w-full max-w-full">
        <span
          className="relative flex max-w-full flex-row p-3 items-center flex w-full justify-center dark:text-slate-100 dark:bg-slate-900 hover:cursor-pointer"
-         onClick={() => {
-            setShow((show) => !show);
-         }}
+         onClick={() => { setShow((show) => !show); }}
        >
          <span
            className={`flex flex-row items-center ${
@@ -98,16 +109,10 @@ const BtnCollapse = ({children, Icon, teks, expand, force, menuShow}) => {
            {(!expand || force) && teks}
          </span>
          {show ? (
-           !expand ? (
-             <ChevronUpIcon className="w-4 h-4" />
-           ) : (
-             <ChevronLeftIcon className="w-4 h-4" />
-           )
-         ) : !expand ? (
-           <ChevronDownIcon className="w-4 h-4" />
-         ) : (
-           <ChevronRightIcon className="w-4 h-4" />
-         )}
+           !expand ? ( <ChevronUpIcon className="w-4 h-4" /> ) :
+           ( <ChevronLeftIcon className="w-4 h-4" /> )
+         ) : !expand ? ( <ChevronDownIcon className="w-4 h-4" /> ) : (
+           <ChevronRightIcon className="w-4 h-4" /> )}
        </span>
        <span
          className={`${expand ? "absolute w-max" : "static w-auto"} ${
