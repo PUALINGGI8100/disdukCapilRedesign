@@ -1,5 +1,5 @@
 import alamat from "../../../assets/alamat.jpg"
-import { GlobeAltIcon, EnvelopeIcon, IdentificationIcon } from "@heroicons/react/24/solid";
+import { EnvelopeIcon, MapPinIcon, PhoneIcon } from "@heroicons/react/24/solid";
 const Alamat = () => {
    return (
      <div className="flex flex-col bg-white border border-gray-200 rounded-lg shadow lg:flex-row dark:border-gray-700 dark:bg-gray-800 w-full sm:w-1/2 md:w-1/2 lg:w-2/4 h-max">
@@ -15,7 +15,7 @@ const Alamat = () => {
          </h5>
          <div className="flex flex-col mb-3 font-normal text-gray-700 dark:text-gray-400 gap-3 text-xs sm:text-sm md:text-sm lg:text-md">
            <span className="flex w-full h-max gap-3">
-             <GlobeAltIcon className="w-5 h-5" />
+             <MapPinIcon className="w-5 h-5" />
              <p className="flex flex-wrap w-full h-max">
                Jalan Pors Polewali-Mamasa Rante-rante Kecamatan Mamasa Kabupaten
                Mamasa Sulbar
@@ -28,7 +28,7 @@ const Alamat = () => {
              </p>
            </span>
            <span className="flex w-full h-max gap-3">
-             <IdentificationIcon className="w-5 h-5" />
+             <PhoneIcon className="w-5 h-5" />
              <p className="flex flex-wrap w-full h-max">081373117775</p>
            </span>
          </div>

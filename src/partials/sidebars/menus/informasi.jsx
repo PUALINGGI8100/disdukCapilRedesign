@@ -2,16 +2,12 @@ import { useEffect, useContext } from "react";
 import { LayananCTX, InformasiCTX } from "./collapseCTX";
 import { ChevronRightIcon, ChevronDownIcon, ChevronLeftIcon, ChevronUpIcon, InformationCircleIcon } from "@heroicons/react/24/solid"
 
-const BtnInformasi = ({ children, expand }) => {
+const BtnInformasi = ({ children, expand, active }) => {
    const { isLayananActive, setIsLayananActive } = useContext(LayananCTX);
    const { isInformasiActive, setIsInformasiActive } = useContext(InformasiCTX);
-   useEffect(() => {
-      console.log(isLayananActive);
-      console.log(isInformasiActive);
-   },[isLayananActive, isInformasiActive])
    return (
-      <div className={`layanan-collapse flex flex-col ${!expand?"w-full gap-3":"w-full"} dark:text-white`}>
-         <button className="flex items-center w-full p-3" onClick={
+      <div className={`layanan-collapse flex flex-col ${!expand?"w-full gap-3":"w-full"} dark:text-white ${active&&"bg-cyan-600 dark:bg-cyan-300"}`}>
+         <button className={`flex items-center w-full p-3 ${active&&"dark:text-slate-900"}`} onClick={
             async ()=>{
                await setIsLayananActive(false);
                await setIsInformasiActive((v)=>!v);

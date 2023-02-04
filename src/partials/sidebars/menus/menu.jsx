@@ -4,7 +4,7 @@ import Anchor from "./Anchor"
 import BtnLayanan from "./layanan";
 import BtnInformasi from "./informasi";
 // icons
-import { HomeIcon, UserIcon, WrenchScrewdriverIcon, InformationCircleIcon, ArrowsPointingInIcon, ArrowsPointingOutIcon, SunIcon, MoonIcon, ChevronDownIcon, ChevronUpIcon, ChevronLeftIcon, ChevronRightIcon, ChatBubbleLeftRightIcon, ClipboardDocumentListIcon, BackspaceIcon, PhotoIcon, XCircleIcon } from "@heroicons/react/24/solid"
+import { HomeIcon, ArrowsPointingInIcon, ArrowsPointingOutIcon, SunIcon, MoonIcon, ChevronDownIcon, ChevronUpIcon, ChevronLeftIcon, ChevronRightIcon, ChatBubbleLeftRightIcon, ClipboardDocumentListIcon, PhotoIcon, XCircleIcon, BuildingOfficeIcon } from "@heroicons/react/24/solid"
 // image
 import LOGO from "../../../assets/logoDisDukCaPil.png";
 import MMSLogo from "../../../assets/dinasMMS.png";
@@ -32,7 +32,7 @@ const Menu = () => {
       <InformasiCTX.Provider value={isInformasiActiveMemo}>
          <span className={`absolute ${!expand&&menuShow?"flex":"hidden"} p-0 m-0 left-0 top-0 w-[100vw] h-full bg-slate-500 dark:bg-slate-200 backdrop-blur-full opacity-70`}></span>
          <nav className={`relative bg-white dark:bg-slate-900 flex flex-col w-max h-full max-h-full overflow-x-visible`}>
-            <div className={`relative flex bg-slate-300 ${!expand?"w-full flex-row":"flex-col w-full"} p-3 py-5 flex-wrap gap-3 justify-center items-center bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100 text-sm`}>
+            <div className={`relative flex bg-slate-300 ${!expand?"w-full flex-row":"flex-col w-full"} p-3 py-5 flex-wrap gap-3 justify-center items-center bg-slate-100 text-slate-900 dark:bg-slate-700 dark:text-slate-100 text-sm`}>
                <span className={`${!expand?"grow":"grow-0 w-max"} h-max`}>
                   <img className="w-auto h-6" src={expand?MMSLogo:LOGO} />
                </span>
@@ -43,19 +43,19 @@ const Menu = () => {
                }} />
             </div>
             <div className={`scroll-menu py-5 flex flex-col h-full max-w-full max-h-full justify-start items-center ${!expand?"overflow-y-auto w-full":"overvlow-x-visible w-max"}`}>
-               <Anchor isActive={activeLink === 0} Icon={HomeIcon} to="/" text="Home" expand={expand} onClick={() => { setActiveLink(0) }} />
-               <Anchor isActive={activeLink === 1} Icon={UserIcon} to="/profile" text="profile" expand={expand} onClick={() => { setActiveLink(1) }} />
+               <Anchor isActive={activeLink === 0} Icon={HomeIcon} to="/" text="Home" expand={expand} onClick={() => { setActiveLink(0) }} title="Halaman Depan" />
+               <Anchor isActive={activeLink === 1} Icon={BuildingOfficeIcon} to="/profile" text="profile" expand={expand} onClick={() => { setActiveLink(1) }} title="profil kantor" />
                {/* LAYANAN menu */}
-               <BtnLayanan expand={expand}>
-                  <Anchor isActive={activeLink===3} to="/layanan/1" text="Standard layanan" expand={expand} onClick={() => { setActiveLink(3) }} />
-                  <Anchor isActive={activeLink===4} to="/layanan/2" text="Prosedur dan tata cara pengaduan" expand={expand} onClick={() => { setActiveLink(4) }} />
-                  <Anchor isActive={activeLink===5} to="/layanan/3" text="Produk layanan" expand={expand} onClick={() => { setActiveLink(5) }} />
-                  <Anchor isActive={activeLink===6} to="/layanan/4" text="SOP Pendaftaran Penduduk" expand={expand} onClick={() => { setActiveLink(6) }} />
+               <BtnLayanan expand={expand} active={[3,4,5,6].some((v)=>v===activeLink)}>
+                  <Anchor isActive={activeLink===3} to="/layanan/1" text="Standard layanan" expand={expand} onClick={() => { setActiveLink(3) }} inside={true} />
+                  <Anchor isActive={activeLink===4} to="/layanan/2" text="Produk Layanan" expand={expand} onClick={() => { setActiveLink(4) }} inside={true} />
+                  <Anchor isActive={activeLink===5} to="/layanan/3" text="SOP Pelayanan" expand={expand} onClick={() => { setActiveLink(5) }} inside="true" />
+                  <Anchor isActive={activeLink===6} to="/layanan/4" text="Formulir" expand={expand} onClick={() => { setActiveLink(6) }} inside={true} />
                </BtnLayanan>
                {/* INFORMASI Menu */}
-               <BtnInformasi expand={expand}>
-                  <Anchor isActive={activeLink===7} to="/informasi/1" text="DPA" expand={expand} onClick={() => { setActiveLink(7) }} />
-                  <Anchor isActive={activeLink === 8} to="/informasi/2" text="RENSTRA" expand={expand} onClick={() => { setActiveLink(8) }} />
+               <BtnInformasi expand={expand} active={[7,8,9,10,11].some((v)=>v===activeLink)}>
+                  <Anchor isActive={activeLink===7} to="/informasi/1" text="DPA" expand={expand} onClick={() => { setActiveLink(7) }} inside={true} />
+                  <Anchor isActive={activeLink === 8} to="/informasi/2" text="RENSTRA" expand={expand} onClick={() => { setActiveLink(8) }} inside={true} />
                   <BtnCollapse teks="DATA" expand={expand} force={true} menuShow={menuShow}>
                      <Anchor isActive={activeLink === 9} to="/informasi/3/1" text="sekertariat" expand={expand} onClick={() => { setActiveLink(9) }} />
                      <Anchor isActive={activeLink === 10} to="/informasi/3/2" text="DAFDUK" expand={expand} onClick={() => { setActiveLink(10) }} />

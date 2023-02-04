@@ -1,0 +1,9 @@
+ol li {
+   list-style-type: decimal !important;
+}
+ol ul li {
+   list-style-type: disc !important;
+}
+ul li {
+   list-style-type: disc !important;
+}

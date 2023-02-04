@@ -1,10 +1,9 @@
 import { Outlet } from "react-router-dom";
 const Layanan = () => {
    return (
-      <div className="w-full h-full block text-center">
-         <h1 className="w-full">LAYANAN</h1>
+      <section className="w-full h-full border-0 shadow-0 block py-5 sm:px-5 sm:py-0">
          <Outlet />
-      </div>
+      </section>
    );
 }
 

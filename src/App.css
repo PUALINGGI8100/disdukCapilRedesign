@@ -1,4 +1,9 @@
 *{ box-sizing:border-box; }
+*{
+   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+   transition-duration: 50ms;
+}
 body::-webkit-scrollbar {
    width: .6em;
 }
@@ -24,4 +29,13 @@ body::-webkit-scrollbar-thumb {
    border-radius: .2em;
    background-color: rgb(8, 181, 233);
    outline: unset;
+}
+
+@media screen and (max-width:360px){
+   body::-webkit-scrollbar-track {
+      box-shadow: unset;
+   }
+   .main-scroll::-webkit-scrollbar-track {
+      box-shadow: unset;
+   }
 }

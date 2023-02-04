@@ -5,7 +5,7 @@ const Motto = () => {
    const [expand, setExpand] = useState(false);
    return (
       <div className="w-full flex flex-col text-slate-900 dark:text-white">
-         <button className="flex items-center rounded-sm p-3 sm:p-5 bg-teal-200 dark:bg-teal-900" onClick={()=>{setExpand((expand)=>!expand)}}>
+         <button className="flex items-center rounded-sm p-3 sm:p-5 bg-green-300 dark:bg-green-500" onClick={()=>{setExpand((expand)=>!expand)}}>
             <span className="block text-start text-xs sm:text-sm font-bold grow">
                MOTTO
             </span>
